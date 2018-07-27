@@ -51,11 +51,11 @@ Finally, make a second user account in the admin that doesn't have staff
 privileges. You'll use this to log into the chat in a second window, and to test
 the authentication on that staff-only room.
 
-Now, open a second window in another browser or in "incognito" mode - you'll be
+Now, open a second window in another browser or in incognito mode - you'll be
 logging in to the same site with two user accounts. Navigate to
 http://localhost:8000 in both browsers and open the same chatroom.
 
-Now, you can type messages and see them appear on both screens at once. You can
+Now, you can type messages and see them appear on both screens at once and you can also see the list of actieusers in both the screens. You can
 join other rooms and try there, and see how you receive messages from all rooms
 you've currently joined.
 
@@ -68,8 +68,7 @@ How It Works
 
 There's a normal Django view that just serves a HTML page behind the normal
 ``@login_required`` decorator, and that is basically a single-page app with
-all the JS loaded into the ``index.html`` file (as this is an example).
-
+all the JS loaded into the ``index.html`` file
 There's a single consumer, which you can see routed to in ``multichat/routing.py``,
 which is wrapped in the Channels authentication ASGI middleware so it can check
 that your user is logged in and retrieve it to check access as you ask to join
