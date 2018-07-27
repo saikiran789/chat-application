@@ -15,6 +15,8 @@ Some channels can be limited to only "staff" users; the example includes
 code that checks user credentials on incoming WebSockets to allow or deny them
 access to chatroom streams based on their staff status.
 
+Whenever User joins the room along with chat box active userlist will be displayed.
+
 
 Installation
 ------------
@@ -34,23 +36,6 @@ Finally, run::
 
     python manage.py migrate
     python manage.py runserver
-
-
-Docker installation
-~~~~~~~~~~~~~~~~~~~
-
-Run the app::
-
-    docker-compose up -d
-
-The app will now be running on: {your-docker-ip}:8000
-
-**Note:** You will need to prefix any ``python manage.py`` commands with: ``docker-compose run --rm web``. e.g.: ``docker-compose run --rm web python manage.py createsuperuser``
-
-Finally, run::
-
-    docker-compose run --rm web python manage.py migrate
-
 
 Usage
 -----
@@ -103,31 +88,6 @@ event is sent over the channel layer to that group. The consumers who are in
 the group will receive those messages, and the consumer also has handler
 functions for those (e.g. ``chat_join``), which it uses to encode the events
 down into the WebSocket wire format before sending them to the client.
-
-
-Suggested Exercises
--------------------
-
-If you want to try out making some changes and getting a feel for Channels,
-here's some ideas and hints on how to do them:
-
-* Make messages from yourself have a different message type. You'll need to
-  edit the ``chat_message`` function to send a different packet down to the
-  client based on if the ``chat.message`` event it gets is from you or not.
-
-* Add message persistence. There's already a message sent to make a user join
-  a room, so you can use that to send some previous messages; you'll need to make
-  a model to save messages in, though.
-
-* Make the Room list dynamically change as rooms are added and removed.
-  You could add a common group that every socket joins and send events to it
-  as rooms are created/deleted.
-
-* Add message editing and deletion. You'll need to have made them persistent
-  first; make sure you send message IDs down with every message so the client can
-  keep track of them. Then, write some code to handle editing and trigger
-  sending new messages down when this happens with the message ID it's happening to.
-
 
 Further Reading
 ---------------
