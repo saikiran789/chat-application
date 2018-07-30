@@ -29,8 +29,7 @@ def index(request):
      })
 
 def userlist(request):
-    #onlineuser=[]
-    #onlineuser = OnlineUsers.objects.filter(user="sahithi")
+   
     room_id=2
     records = OnlineUsers.objects.filter(title=room_id)
     json_res = []
