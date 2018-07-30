@@ -22,57 +22,15 @@
    </div>
 
 <div id="mySidenav"></div>
-<div id="body"></div>
-<div id="room.id"></div>
+
+
      
 {% endblock %}
 
 {% block extra_body %}
 
-	<script langauge="javascript">
-  	       //  var auto_refresh =
-       /* function list(){
-       $.ajax({
-  url: 'userlist/',
-  type: 'get',
-  dataType:'json',
-  success: function(data, status){
-   // Perform operation on the return value
-//   alert(response);
-     //var obj = jQuery.parseJSON(data);
-    //console.log("Data"+ obj[0]);
-    //console.log("Status"+status);
-    var json = $.parseJSON(data);
-    var count = 0;
-$(json).each(function(i,val){
-    
-    $.each(val,function(k,v){
-        if(k.includes('fields')){
-          console.log(v.user);     
-          count++;
-          $('#results').append('<li class="name">'+v.user+'</>');
-          $('#mySidenav').append($('#results'));
-        }
-        //document.getElementById("mySidenav").innerHTML= v.user;
-        
-});
-});
-    console.log("Count"+count)
-   //document.getElementById("mySidenav").innerHTML= data;
-  }
- });*/
-$(function(){
-        $("body").click(function(){
-            $(this).attr("disabled", "disabled");
-            $("data-room-id").removeAttr("disabled");
-        });
-
-        
-        $("body").click(function(){
-            $(this).attr("disabled", "disabled");
-            $("data-room-id").removeAttr("disabled");
-        });
-    });
+<script langauge="javascript">
+  
 
 window.setInterval(function() {
 
@@ -88,27 +46,10 @@ window.setInterval(function() {
 
             
   }, 5000); 
-/*setInterval(function(){
-              $('.sidenav').load("userlist/");
-                
-                              
-            },5000);*/
-     
+
     </script>
 
- <script type="text/javascript">
-/*$("button.room-link").click(function () {
-		
-                roomId = $(this).attr("data-room-id");
-                console.log("data-room-id is", roomId)
-                 if (inRoom(roomId)) { 
-    {document.getElementById("data-room-id").disabled = true;}
-  else if
-    {document.getElementById("data-room-id").disabled = false;}
-}
-});*/
-</script>
-
+ 
        
    <script>
         $(function () {	
@@ -128,11 +69,7 @@ window.setInterval(function() {
                 var data = JSON.parse(message.data);
 		        console.log(data);
                 console.log("List"+typeof(data.list));
-                /*for (var i=0 in data.list){
                 
-                   res=data.list[i];
-                   return res;
-                   }*/
            
                 // Handle errors
                 if (data.error) {
@@ -162,17 +99,7 @@ window.setInterval(function() {
                             "</div>"
 			    
                     );
-                   /* var side	Bardiv =$(
-
-			"<div id='mySidenav' clas'sidenav'>" + data.list +
-                        "<a href='javascript:void(0)' class='closebtn' onclick='closeNav()'>&times;</a>" +
-                         "<location.reload(3000)>" +
-
-                        "</div>"
-                        
-                    );*/
-                    
-                                     
+                               
                    // Hook up send button to send a message
                     roomdiv.find("form").on("submit", function () {
                         socket.send(JSON.stringify({
@@ -186,9 +113,7 @@ window.setInterval(function() {
                     
                     $("#chats").append(roomdiv);
                    document.getElementById("mySidenav").style.width = "250px";
-               	   
-		 //  $("#chats").append(sideBardiv);
-                   // console.log(sideBardiv);
+               	
                     // Handle leaving
                 } 
 
@@ -197,14 +122,6 @@ window.setInterval(function() {
                     console.log("Leaving room " + data.leave);
                     $("#room-" + data.leave).remove();
                     document.getElementById("mySidenav").style.width = "0";
-
-/*                    var sideBardiv =$(
-                        
-			"<div id='mySidenav' class='sidenav'>" + data.list +
-                        "<a href='javascript:void(0)' class='closebtn' onclick='closeNav()'>&times;</a>" +
-                        "</div>"
-                        	
-                    );*/
                    
                  
                     // Handle getting a message
@@ -317,5 +234,4 @@ window.setInterval(function() {
 
 
 {% endblock %}
-
 
