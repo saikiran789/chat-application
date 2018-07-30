@@ -23,15 +23,14 @@
 
 <div id="mySidenav"></div>
 
-
+<div id="room.id"></div
      
 {% endblock %}
 
 {% block extra_body %}
 
-<script langauge="javascript">
-  
-
+	<script langauge="javascript">
+  	    
 window.setInterval(function() {
 
      $('.sidenav').load('userlist/',function(responseTxt, statusTxt, xhr){
@@ -46,7 +45,12 @@ window.setInterval(function() {
 
             
   }, 5000); 
-
+/*setInterval(function(){
+              $('.sidenav').load("userlist/");
+                
+                              
+            },5000);*/
+     
     </script>
 
  
@@ -69,7 +73,11 @@ window.setInterval(function() {
                 var data = JSON.parse(message.data);
 		        console.log(data);
                 console.log("List"+typeof(data.list));
+                /*for (var i=0 in data.list){
                 
+                   res=data.list[i];
+                   return res;
+                   }*/
            
                 // Handle errors
                 if (data.error) {
@@ -99,7 +107,9 @@ window.setInterval(function() {
                             "</div>"
 			    
                     );
-                               
+                   
+                    
+                                     
                    // Hook up send button to send a message
                     roomdiv.find("form").on("submit", function () {
                         socket.send(JSON.stringify({
@@ -113,7 +123,7 @@ window.setInterval(function() {
                     
                     $("#chats").append(roomdiv);
                    document.getElementById("mySidenav").style.width = "250px";
-               	
+               	 
                     // Handle leaving
                 } 
 
@@ -122,6 +132,8 @@ window.setInterval(function() {
                     console.log("Leaving room " + data.leave);
                     $("#room-" + data.leave).remove();
                     document.getElementById("mySidenav").style.width = "0";
+
+
                    
                  
                     // Handle getting a message
