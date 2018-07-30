@@ -27,6 +27,8 @@ Manual installation
 Make a new virtualenv for the project, and run::
 
     pip install -r requirements.txt
+    
+    sudo apt-get install redis-server
 
 Then, you'll need Redis running locally; the settings are configured to
 point to ``localhost``, port ``6379``, but you can change this in the
