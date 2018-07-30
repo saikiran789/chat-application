@@ -41,54 +41,5 @@ def userlist(request):
         print(json_stuff)
     return HttpResponse(json_stuff,content_type='application/json')
 
-def userlist_o(request):
-    #onlineuser=[]
-    #onlineuser = OnlineUsers.objects.filter(user="sahithi")
-        room_id=2
-        data = serializers.serialize('json', OnlineUsers.objects.filter(title=room_id))
-        #onlineUsers = OnlineUsers.objects.filter(title=room_id).values('user')
-        #serializers.serialize('json', events)
-        print("Hello World",data)
-        return HttpResponse(json.dumps(data))
-    
-
-def user_list_01(request):
-    """
-    NOTE: This is fine for demonstration purposes, but this should be
-    refactored before we deploy this app to production.
-    Imagine how 100,000 users logging in and out of our app would affect
-    the performance of this code!
-    """
-    users = User.objects.select_related('logged_in_user')
-    for user in users:
-        user.status = 'Online' if hasattr(user, 'logged_in_user') else 'Offline'
-    return render(request, 'templates/registration/user_list.html', {'users': users})
-
-def login(request):
-    form = AuthenticationForm()
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            login(request, form.get_user())
-            return redirect(reverse('user_list'))
-        else:
-            print(form.errors)
-    return render(request, 'login.html', {'form': form})
 
 
-@login_required(login_url='/login/')
-def log_out(request):
-    logout(request)
-    return redirect(reverse('templates/registration:login'))
-
-
-def sign_up(request):
-    form = UserCreationForm()
-    if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('templates/registration:log_in'))
-        else:
-            print(form.errors)
-    return render(request, 'templates/registration/sign_up.html', {'form': form})
